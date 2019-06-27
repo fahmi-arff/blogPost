@@ -6,3 +6,10 @@ mongoose.connection
   .on('error', (error) => {
     console.warn('Warning', error);
   })
+
+// done is mocha magic which have async to wait
+beforeEach((done) => {
+  mongoose.connection.collection.users.drop(() => {
+    done();
+  })
+})
