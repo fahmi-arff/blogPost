@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// set Promise to global
+mongoose.Promise = global.Promise;
+
 // before only excetution one time to all test
 before((done) => {
   mongoose.connect('mongodb://localhost/user_test',{ useNewUrlParser: true });
