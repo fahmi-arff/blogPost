@@ -10,9 +10,9 @@ describe('Updating records', () => {
       .then(() => done());
   });
 
-  it('instance type using set n save', done => {
-    joe.set('name', 'Alex');
-    joe.save()
+  // Make reusable assertion
+  function assertName(operation, done){
+    operation
       // user find return array
       .then(() => User.find({}))
       .then(users => {
@@ -20,6 +20,12 @@ describe('Updating records', () => {
         assert(users[0].name === 'Alex');
         done();
       });
+  }
+
+  it('instance type using set n save', done => {
+    joe.set('name', 'Alex');
+    assertName(joe.save(), done);
+      
   });
 
 });
