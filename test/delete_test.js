@@ -21,8 +21,15 @@ describe('Deleting a user', () => {
       })
   });
 
-  // it('class method remove', done => {
-  // });
+  it('class method remove', done => {
+    // remove a bunch of records with some given criteria
+    User.deleteOne({ name: 'Joe'})
+      .then(() => User.findOne({ name: 'Joe' }))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
 
   // it('class method findAndRemove', done => {
   // });
