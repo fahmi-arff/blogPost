@@ -32,4 +32,18 @@ describe('Updating records', () => {
     assertName(joe.updateOne({ name: 'Alex' }), done);
   });
 
+  it('a model class can update', done => {
+    assertName(
+      User.updateOne({ name: 'Joe'}, { name: 'Alex'}),
+      done
+    )
+  });
+  
+  // it('a model class can update one record', done => {
+
+  // });
+  
+  // it('a model class can find a record with and Id and update', done => {
+
+  // });
 });
