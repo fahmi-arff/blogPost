@@ -40,7 +40,13 @@ describe('Deleting a user', () => {
         });
   });
 
-  // it('class method findIdAndRemove', done => {
-  // });
+  it('class method findIdAndRemove', done => {
+    User.findByIdAndRemove(joe._id)
+      .then(() => User.findOne({ name: 'Joe' }))
+      .then((user) => {
+        assert(user === null);
+        done();
+      });
+  });
 })
 
