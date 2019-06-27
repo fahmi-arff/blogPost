@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/user_test',{ useNewUrlParser: true });
-mongoose.connection
-  .once('open', () => console.log('Good to go!'))
-  .on('error', (error) => {
-    console.warn('Warning', error);
-  })
+// before only excetution one time to all test
+before((done) => {
+  mongoose.connect('mongodb://localhost/user_test',{ useNewUrlParser: true });
+  mongoose.connection
+    .once('open', () => { done(); })
+    .on('error', (error) => {
+      console.warn('Warning', error);
+    })
+})
 
 // done is mocha magic which have async to wait
 beforeEach((done) => {
