@@ -27,5 +27,9 @@ describe('Updating records', () => {
     assertName(joe.save(), done);
       
   });
+  
+  it('a model instance can update', done => {
+    assertName(joe.updateOne({ name: 'Alex' }), done);
+  });
 
 });
