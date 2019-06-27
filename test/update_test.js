@@ -36,7 +36,7 @@ describe('Updating records', () => {
     assertName(
       User.updateOne({ name: 'Joe'}, { name: 'Alex'}),
       done
-    )
+    );
   });
   
   // it('a model class can update one record', done => {
