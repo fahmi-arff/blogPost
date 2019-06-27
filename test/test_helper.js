@@ -9,7 +9,7 @@ mongoose.connection
 
 // done is mocha magic which have async to wait
 beforeEach((done) => {
-  mongoose.connection.collection.users.drop(() => {
+  mongoose.connection.collections.users.drop(() => {
     done();
   })
 })
