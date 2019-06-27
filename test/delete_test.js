@@ -11,23 +11,23 @@ describe('Deleting a user', () => {
   });
 
   it('model instance remove', done => {
-    console.log('dd')
-    done();
+    joe.remove()
+      // after remove then find the user with the name 'Joe'
+      .then(() => User.findOne({ name: 'Joe'}))
+      .then((user) => {
+        // assert when user is not found / null
+        assert(user === null);
+        done();
+      })
   });
 
-  it('class method remove', done => {
-    console.log('dd')
-    done();
-  });
+  // it('class method remove', done => {
+  // });
 
-  it('class method findAndRemove', done => {
-    console.log('dd')
-    done();
-  });
+  // it('class method findAndRemove', done => {
+  // });
 
-  it('class method findIdAndRemove', done => {
-    console.log('dd')
-    done();
-  });
+  // it('class method findIdAndRemove', done => {
+  // });
 })
 
