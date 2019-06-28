@@ -53,7 +53,8 @@ describe('Updating records', () => {
     );
   });
 
-  it('a user can have their postcount incremented by 1', done => {
+  // x mean not excetution
+  xit('a user can have their postcount incremented by 1', done => {
     User.updateOne({ name: 'Joe'}, { $inc: { postCount: 1 } })
       .then(() => User.findOne({ name: 'Joe'}))
       .then(user => {
