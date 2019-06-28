@@ -36,5 +36,28 @@ describe('Association', () => {
       });
   });
 
-
+  it('save a full relation graph', done => {
+    User.findOne({ name: 'Joe' })
+      .populate({
+        // in that user load blogpost
+        path: 'blogPosts',
+        populate: {
+          // inside blogpost fetch the comment property and load up
+          path:'comments',
+          // what model
+          model: 'comment',
+          populate: {
+            path: 'user',
+            model: 'user'
+          }
+        }
+      })
+        .then(user => {
+          assert(user.name === 'Joe');
+          assert(user.blogPosts[0].title === 'Mongod');
+          assert(user.blogPosts[0].comments[0].content === 'Great post');
+          assert(user.blogPosts[0].comments[0].user.name === 'Joe')
+          done();
+        })
+  })
 });
