@@ -16,5 +16,12 @@ describe('Association', () => {
     blogPost.comment.push(comment);
     // association comment to joe
     comment.user = joe;
+
+    Promise.all([
+      joe.save(),
+      blogPost.save(),
+      comment.save()
+    ])
+      .then(() => done());
   });
 });
