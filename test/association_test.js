@@ -4,24 +4,33 @@ const Comment  = require('../src/comment');
 const BlogPost = require('../src/blogPost');
 
 describe('Association', () => {
-  let joe, blogPost, comment;
+  let joe, blogpost, comment;
 
   beforeEach(done => {
     joe = new User({ name: 'Joe' });
-    blogPost = new BlogPost({ title: 'Mongod', content: 'content mongod'});
+    blogpost = new BlogPost({ title: 'Mongod', content: 'content mongod'});
     comment = new Comment({ content: 'Great post'});
 
     // embedding the document
-    joe.blogPost.push(blogPost);
-    blogPost.comment.push(comment);
+    joe.blogPosts.push(blogpost);
+    blogpost.comments.push(comment);
     // association comment to joe
     comment.user = joe;
 
     Promise.all([
       joe.save(),
-      blogPost.save(),
+      blogpost.save(),
       comment.save()
     ])
       .then(() => done());
+  });
+
+  // it.only to make test just this line
+  it.only('save a relation between a user and a blogpost', done => {
+    User.findOne({ name: 'Joe' })
+      .then(user => {
+        console.log(user);
+        done();
+      });
   });
 });
