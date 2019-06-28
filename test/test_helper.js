@@ -15,7 +15,12 @@ before((done) => {
 
 // done is mocha magic which have async to wait
 beforeEach((done) => {
-  mongoose.connection.collections.users.drop(() => {
-    done();
+  const { users, comments, blogPosts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogPosts.drop(() => {
+        done();
+      })
+    })
   })
 })
