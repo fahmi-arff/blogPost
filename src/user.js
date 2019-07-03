@@ -25,10 +25,13 @@ UserSchema.virtual('postCount').get(function() {
 });
 
 // make middleware for remove all collection association
-UserSchema.pre('remove', function() {
+UserSchema.pre('remove', function(next) {
   // load blogPost collection withour require the file
   const Blogpost = mongoose.model('blogPost')
-})
+  // go to blogpost -> id, if id is in then remove
+  Blogpost.remove({ _id: { $in: this.blogPosts } })
+    .then(() => next());
+});
 
 const User = mongoose.model('user', UserSchema);
 
