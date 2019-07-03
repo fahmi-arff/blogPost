@@ -20,5 +20,12 @@ describe('Middleware', () => {
       .then(() => done());
   });
 
-
-})
+  it('user clean up dagnling blogpost on remove', done =>{
+    joe.remove()
+      .then(() => BlogPost.countDocuments())
+      .then(count => {
+        assert(count === 0);
+        done();
+      });
+  });
+});
