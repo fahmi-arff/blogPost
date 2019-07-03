@@ -24,6 +24,12 @@ UserSchema.virtual('postCount').get(function() {
   return this.posts.length;
 });
 
+// make middleware for remove all collection association
+UserSchema.pre('remove', function() {
+  // load blogPost collection withour require the file
+  const Blogpost = mongoose.model('blogPost')
+})
+
 const User = mongoose.model('user', UserSchema);
 
 module.exports = User;
